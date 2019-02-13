@@ -6,11 +6,11 @@ const API_ADDRESS = 'https://spotify-api-wrapper.appspot.com'
 export default class App extends Component {
   state = {
     artistQuery: '',
-    artist: null
+    artist: null,
+    tracks: []
   }
 
   uppdateArtisQuery = (event) => {
-    console.log('event', event.target.value);
     this.setState({
       artistQuery: event.target.value
     })
@@ -27,16 +27,15 @@ export default class App extends Component {
     fetch(`${API_ADDRESS}/artist/${this.state.artistQuery}`)
       .then(response => response.json())
       .then( json => {
-        console.log(json);
         if(json.artists.total > 0){
-        const artist = json.artists.items[0];
-        console.log(artist);
-        this.setState({artist})
-        //apiのオブジェクトで入ってくるものをさらにセレクトして取得
-        fetch(`${API_ADDRESS}/artist/${artist.id}/top-tracks`)
-          .then(response => response.json())
-          .then(json => console.log('track json',json))
-          .catch(error => alert(error.message))
+          const artist = json.artists.items[0];
+          this.setState({artist})
+
+          //apiのオブジェクトで入ってくるものをさらにセレクトして取得
+          fetch(`${API_ADDRESS}/artist/${artist.id}/top-tracks`)
+            .then(response => response.json())
+            .then(json => this.setState({ tracks: json.tracks}))
+            .catch(error => alert(error.message))
         }
     })
     .catch(error => console.log('error', error))
