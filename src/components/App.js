@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
+
+
+const API_ADDRESS = 'https://spotify-api-wrapper.appspot.com'
+
 export default class App extends Component {
   state = {
     artistQuery: '',
+    artist: null
   }
 
   uppdateArtisQuery = (event) => {
@@ -19,8 +24,11 @@ export default class App extends Component {
 
   searchArtist = () => {
     console.log('this.state', this.state);
+    fetch(`${API_ADDRESS}/artist/${this.state.artistQuery}`)
+    .then(response => response.json())
+    .then(json => this.setState({ artist: json }))
+    .catch(error => console.log('error', error))
   }
-
 
   render() {
     return (

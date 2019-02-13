@@ -24052,6 +24052,8 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+var API_ADDRESS = 'https://spotify-api-wrapper.appspot.com';
+
 var App =
 /*#__PURE__*/
 function (_Component) {
@@ -24071,7 +24073,8 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(App)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      artistQuery: ''
+      artistQuery: '',
+      artist: null
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "uppdateArtisQuery", function (event) {
@@ -24090,6 +24093,15 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "searchArtist", function () {
       console.log('this.state', _this.state);
+      fetch("".concat(API_ADDRESS, "/artist/").concat(_this.state.artistQuery)).then(function (response) {
+        return response.json();
+      }).then(function (json) {
+        return _this.setState({
+          artist: json
+        });
+      }).catch(function (error) {
+        return console.log('error', error);
+      });
     });
 
     return _this;
