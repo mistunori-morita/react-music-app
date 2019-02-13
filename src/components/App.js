@@ -11,6 +11,11 @@ export default class App extends Component {
     tracks: []
   }
 
+  componentDidMount(){
+    this.searchArtist('AAA')
+  }
+
+
   searchArtist = artistQuery => {
     console.log('this.state', this.state);
     fetch(`${API_ADDRESS}/artist/${artistQuery}`)
