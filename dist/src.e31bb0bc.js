@@ -24076,6 +24076,14 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "uppdateArtisQuery", function (event) {
       console.log('event', event.target.value);
+
+      _this.setState({
+        artistQuery: event.target.value
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "searchArtist", function () {
+      console.log('this.state', _this.state);
     });
 
     return _this;
@@ -24087,7 +24095,9 @@ function (_Component) {
       return _react.default.createElement("div", null, _react.default.createElement("h2", null, "Music Master"), _react.default.createElement("input", {
         onChange: this.uppdateArtisQuery,
         placeholder: "\u691C\u7D22\u3057\u305F\u3044\u30A2\u30FC\u30C6\u30A3\u30B9\u30C8\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044"
-      }), _react.default.createElement("button", null, "\u691C\u7D22"));
+      }), _react.default.createElement("button", {
+        onClick: this.searchArtist
+      }, "\u691C\u7D22"));
     }
   }]);
 
