@@ -24096,9 +24096,25 @@ function (_Component) {
       fetch("".concat(API_ADDRESS, "/artist/").concat(_this.state.artistQuery)).then(function (response) {
         return response.json();
       }).then(function (json) {
-        return _this.setState({
-          artist: json
-        });
+        console.log(json);
+
+        if (json.artists.total > 0) {
+          var artist = json.artists.items[0];
+          console.log(artist);
+
+          _this.setState({
+            artist: artist
+          }); //apiのオブジェクトで入ってくるものをさらにセレクトして取得
+
+
+          fetch("".concat(API_ADDRESS, "/artist/").concat(artist.id, "/top-tracks")).then(function (response) {
+            return response.json();
+          }).then(function (json) {
+            return console.log('track json', json);
+          }).catch(function (error) {
+            return alert(error.message);
+          });
+        }
       }).catch(function (error) {
         return console.log('error', error);
       });

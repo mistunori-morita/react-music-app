@@ -25,8 +25,20 @@ export default class App extends Component {
   searchArtist = () => {
     console.log('this.state', this.state);
     fetch(`${API_ADDRESS}/artist/${this.state.artistQuery}`)
-    .then(response => response.json())
-    .then(json => this.setState({ artist: json }))
+      .then(response => response.json())
+      .then( json => {
+        console.log(json);
+        if(json.artists.total > 0){
+        const artist = json.artists.items[0];
+        console.log(artist);
+        this.setState({artist})
+        //apiのオブジェクトで入ってくるものをさらにセレクトして取得
+        fetch(`${API_ADDRESS}/artist/${artist.id}/top-tracks`)
+          .then(response => response.json())
+          .then(json => console.log('track json',json))
+          .catch(error => alert(error.message))
+        }
+    })
     .catch(error => console.log('error', error))
   }
 
