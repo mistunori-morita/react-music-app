@@ -11,6 +11,12 @@ export default class App extends Component {
     })
   }
 
+  handleKeyPress = (e) => {
+    if(e.key === 'Enter'){
+      this.searchArtist();
+    }
+  }
+
   searchArtist = () => {
     console.log('this.state', this.state);
   }
@@ -20,7 +26,7 @@ export default class App extends Component {
     return (
       <div>
          <h2>Music Master</h2>
-         <input onChange={this.uppdateArtisQuery} placeholder="検索したいアーティストを入力してください" />
+         <input onChange={this.uppdateArtisQuery} onKeyPress={this.handleKeyPress} placeholder="検索したいアーティストを入力してください" />
          <button onClick={this.searchArtist}>検索</button>
       </div>
     )
