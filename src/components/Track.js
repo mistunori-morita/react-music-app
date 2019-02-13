@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export default class Track extends Component {
 
-  previwAudio = previeUrl => {
+  previwAudio = previeUrl => () => {
     const audio = new Audio(previeUrl)
     audio.play();
   }
