@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import Artist from '../components/Artist'
 
 const API_ADDRESS = 'https://spotify-api-wrapper.appspot.com'
 
@@ -47,6 +47,8 @@ export default class App extends Component {
          <h2>Music Master</h2>
          <input onChange={this.uppdateArtisQuery} onKeyPress={this.handleKeyPress} placeholder="検索したいアーティストを入力してください" />
          <button onClick={this.searchArtist}>検索</button>
+         <hr/>
+         <Artist artist={this.state.artist}/>
       </div>
     )
   }
